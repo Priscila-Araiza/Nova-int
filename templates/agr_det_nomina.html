@@ -1,0 +1,77 @@
+  {% extends "layout.html" %} {% block content %}
+
+<head>
+    <title>HOME-INT</title>
+</head>
+<script src="https://kit.fontawesome.com/c8a4eef53d.js" crossorigin="anonymous"></script>
+<body style="background-color:#ffff;">
+<form action="/agrega_det_nomina/{{nomina.0}}" method='post'>
+<h2>Agregar nuevos detalles de nómina</h2>
+    <script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="/static/js/popper.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <!-- <input type="text" class="form-control" name="sal_base" id="sal_base" value= "{{ nomina.0 }}" required> -->
+    <div class="form-row">
+        
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-md-4">
+            <label for="curp">CURP</label>&nbsp;
+            <select  required name="curp" id="curp" class="form-control">
+                <option value="tipo" selected required>Choose...</option>
+                    {% for empleados in curp %}
+                        <option value="{{ empleados.0 }}">{{ empleados.1 }}</option>
+                    {%  endfor %}
+            </select>
+        </div>
+        
+        
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="sal_base">Salario base</label>
+            <input disabled type="text" class="form-control" name="sal_base" id="sal_base" pattern="^[0-9-.]\d*$" maxlength="11">
+        </div>
+        <br>
+        
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-4">
+            <label for="tot_per">Total de percepciones</label>
+            <input disabled type="text" class="form-control" name="tot_per" id="tot_per" pattern="^[0-9-.]\d*$" maxlength="11">
+        </div><br>
+    </div>
+    
+    <div class="form-row">
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-4">
+          <label for="isr">Impuesto Sobre la Renta</label>
+          <input disabled type="text" class="form-control" name="isr" id="isr" pattern="^[0-9-.]\d*$" maxlength="11">
+        </div>
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-md-2">
+            <label for="imss">IMSS</label>
+            <input disabled type="text" class="form-control" name="imss" id="imss" pattern="^[0-9-.]\d*$" maxlength="11">
+        </div>
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-md-4">
+            <label for="tot_ded">Total de deducciones</label>
+            <input disabled type="text" class="form-control" name="tot_ded" id="tot_ded" pattern="^[0-9-.]\d*$" maxlength="11">
+        </div>
+    </div>
+        <div class="form-row">
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-4">
+            <label for="sal_neto">Salario neto</label>
+            <input disabled type="text" class="form-control" name="sal_neto" id="sal_neto" pattern="^[0-9-.]\d*$" maxlength="11">
+        </div>
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="tot_grabado">Total de grabado</label>
+            <input disabled type="text" class="form-control" name="tot_grabado" id="tot_grabado" pattern="^[0-9-.]\d*$" maxlength="11">
+        </div>
+        </div>
+
+        
+
+    <br><br>
+    
+    &nbsp;&nbsp;&nbsp;
+        <button type="submit" class="btn btn-primary">Agregar &nbsp;<i class="fas fa-plus"></i></button>
+        <a class="btn btn-primary" href="/nomina" align="right">Regresar &nbsp;<i class="fas fa-undo-alt"></i></a>
+    
+</form>
+</body>
+{% endblock %}

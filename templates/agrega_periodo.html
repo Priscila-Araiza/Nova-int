@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<script src="https://kit.fontawesome.com/c8a4eef53d.js" crossorigin="anonymous"></script>
+<head>
+	<title>Tipo de nomina </title>
+</head>
+
+<body style="background-color:#ffff;">
+
+        <form action="/periodo_agr" method="post">
+            <div class="form-row">
+                  <h2>Agrega periodo de pago</h2>
+            </div>
+        <div class="form-group col-md-4">
+          <label for="descripcion">Descripción</label>
+          <input type="text" class="form-control" name="descripcion" id="descripcion" maxlength="50" minlength="1" required>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="ndias">Número de días.</label>
+          <input type="text" class="form-control" name="ndias" id="ndias" maxlength="50"  min="1" pattern="^[0-9]+" required>
+        </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Agregar &nbsp;<i class="fas fa-paper-plane"></i></button>
+
+<script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="/static/js/popper.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <a class="btn btn-primary" href="/periodo" align="right">Regresar &nbsp;<i class="fas fa-undo-alt"></i></a>
+  </form>
+</body>
+{% endblock %}

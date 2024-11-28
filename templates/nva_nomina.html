@@ -1,0 +1,75 @@
+{% extends "layout.html" %} {% block content %}
+
+<head>
+    <title>HOME-INT</title>
+</head>
+<script src="https://kit.fontawesome.com/c8a4eef53d.js" crossorigin="anonymous"></script>
+<body style="background-color:#ffff;">
+<form action="/agrega_nomina" method="post">
+<h2>Agregar nueva nómina</h2>
+    <script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="/static/js/popper.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <div class="form-row"> &nbsp;&nbsp;&nbsp;
+        
+        
+        
+        <div class="form-group col-md-3">
+            <label for="tipo">Tipos de nómina</label>
+            <select required name="tipo" id="tipo" class="form-control">
+                <option value="" selected required>Choose...</option>
+                {% for tipos in tipos_nom %}
+                    <option value="{{ tipos.0 }}">{{ tipos.1 }}</option>
+                {%  endfor %}
+            </select>
+        </div>
+        <br>
+        &nbsp;&nbsp;&nbsp;
+        <div class="form-group col-md-3">
+            <label for="periodo">Periodos de pago</label>
+            <select required name="periodo" id="periodo" class="form-control">
+                <option value="" selected required>Choose...</option>
+                {% for periodos in periodos_nom %}
+                    <option value="{{ periodos.0 }}">{{ periodos.1 }}</option>
+                {%  endfor %}
+            </select>
+        </div> 
+        &nbsp;&nbsp;&nbsp;     
+        
+        <div class="form-group col-md-3">
+            <label for="area">Área</label>
+            <select required name="area" id="area" class="form-control">
+                <option value="" selected required>Choose...</option>
+                {% for areas in areas_nom %}
+                    <option value="{{ areas.0 }}">{{ areas.1 }}</option>
+                {%  endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-3">
+          <label for="fecha">Fecha</label>
+          <input type="date" class="form-control" name="fecha" id="fecha" required>
+        </div>
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-md-3">
+            <label for="anio">Año</label>
+            <input type="text" class="form-control" name="anio" id="anio" maxlength="4" minlength="1" pattern="^[1-9]\d*$" required>
+        </div>
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-md-3">
+            <label for="consecutivo">Consecutivo de Nómina</label>
+            <input type="text" class="form-control" name="consecutivo" id="consecutivo" maxlength="20" min="1" pattern="^[1-9]\d*$" required>
+        </div>
+    </div>
+
+    </div><br><br>
+    
+    &nbsp;&nbsp;&nbsp;
+        <button type="submit" class="btn btn-primary">Agregar &nbsp;<i class="fas fa-plus"></i></button>
+        <a class="btn btn-primary" href="/nomina" align="right">Regresar &nbsp;<i class="fas fa-undo-alt"></i></a>
+    
+</form>
+</body>
+{% endblock %}

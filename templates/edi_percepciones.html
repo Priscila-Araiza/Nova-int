@@ -1,0 +1,51 @@
+{% extends "layout.html" %} {% block content %}
+
+<head>
+    <title>HOME-INT</title>
+</head>
+
+<body style="background-color:#ffff;">
+    <script src="https://kit.fontawesome.com/c8a4eef53d.js" crossorigin="anonymous"></script>
+    <h2>Editar percepción</h2>
+    <form action="/modifica_percepciones/{{percepcion.0}}" method="post">
+        <div class="form-group col-md-8">
+            &nbsp;&nbsp;<label for="Descripcion">Descripción</label>
+            <input type="text" class="form-control" name="Descripcion" id="Descripcion" value="{{percepcion.1}}" placeholder="Descripcion" required>
+        </div>
+        <div class="form-row">
+            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label>Grabado</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            {% if percepcion.2=='si'%}
+            <div class="form-check rorm-check-inline">
+                <input class="form-check-input" type="radio" name="Grabado" id="Grabado1" value="si" checked >
+                <label class="form-check-label" for="Grabado1">Si</label>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <div class="form-check rorm-check-inline">
+                <input class="form-check-input" type="radio" name="Grabado" id="Grabado2" value="no">
+                <label class="form-check-label" for="Grabado2">No</label>
+            </div>
+            {% endif %}
+    
+            {% if percepcion.2=='no'%}
+            <div class="form-check rorm-check-inline">
+                <input class="form-check-input" type="radio" name="Grabado" id="Grabado1" value="si" >
+                <label class="form-check-label" for="Grabado1">Si</label>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+           
+             <div class="form-check rorm-check-inline">
+            <input class="form-check-input" type="radio" name="Grabado" id="Grabado2" value="no" checked>
+            <label class="form-check-label" for="Grabado2">No</label>
+             </div>
+            {% endif %}
+            </div>
+            <br>
+            <div>
+             <button type="submit" class="btn btn-primary">Enviar Cambios &nbsp;<i class="fas fa-paper-plane"></i></button>&nbsp;
+             <a class="btn btn-primary" href="/percepciones" align="left">Regresar &nbsp;<i class="fas fa-undo-alt"></i></a>
+            </div> 
+
+    </form>
+
+</body>
+{% endblock %}

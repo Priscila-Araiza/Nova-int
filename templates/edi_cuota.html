@@ -1,0 +1,85 @@
+{% extends "layout.html" %} {% block content %}
+
+<head>
+    <title>HOME-INT</title>
+</head>
+
+<body style="background-color:#ffff;">
+    <script src="https://kit.fontawesome.com/c8a4eef53d.js" crossorigin="anonymous"></script>
+    <h2>&nbsp;&nbsp;&nbsp;Editar Cuota de IMSS</h2>
+    
+    <form action="/modifica_aportacion/{{aportaciones.0}}" method="post">
+
+        <div class="form-row">
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2" >
+            <label for="anio">Año</label>
+            <input   type="text" class="form-control" name="anio" id="anio" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9"  value="{{ aportaciones.0 }}" value="{ text-align: center}">
+            
+        </div>
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2"  >
+            <label for="uma">UMA</label>
+            <input    type="text" class="form-control" name="uma" id="uma" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9" value="{{ aportaciones.1 }}" >
+        </div>
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="dias">Días</label>
+            <input   type="text" class="form-control" name="dias" id="dias" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9" value="{{ aportaciones.2 }}" >
+        </div>
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="vacacion">Vacaciones</label>
+            <input   type="text" class="form-control" name="vacacion" id="vacacion" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9" value="{{ aportaciones.3 }}" >
+        </div>
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="pri_vaca">Prima Vacacional</label>
+            <input   type="text" class="form-control" name="pri_vaca" id="pri_vaca" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9" value="{{ aportaciones.4 }}" >
+        </div>
+    </div>
+
+    <div class="form-row">
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="aguinaldo">Aguinaldo</label>
+            <input   type="text" class="form-control" name="aguinaldo" id="aguinaldo" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9" value="{{ aportaciones.5 }}" >
+        </div><br>
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="excedente">Excedente</label>
+            <input   type="text" class="form-control" name="excedente" id="excedente" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9" value="{{ aportaciones.6 }}" >
+        </div>
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="pre_dinero">Prestaciones en dinero</label>
+            <input   type="text" class="form-control" name="pre_dinero" id="pre_dinero" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9" value="{{ aportaciones.7 }}" >
+        </div>
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="pre_especie">Prestaciones en especie</label>
+            <input   type="text" class="form-control" name="pre_especie" id="pre_especie" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9" value="{{ aportaciones.8 }}" >
+        </div>
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="inv_vida">Invalidéz y vida</label>
+            <input   type="text" class="form-control" name="inv_vida" id="inv_vida" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9" value="{{ aportaciones.9 }}" >
+        </div>
+    </div>
+        
+
+        <div class="form-group col-2">
+            <label for="ces_vejes">Cesantía y vejés</label>
+            <input   type="text" class="form-control" name="ces_vejes" id="ces_vejes" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9" value="{{ aportaciones.10 }}" >
+        </div>
+    
+
+        <br> &nbsp;&nbsp; <button type="submit" class="btn btn-primary">Enviar Cambios &nbsp;<i class="fas fa-paper-plane"></i></button>
+        <script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
+        <script type="text/javascript" src="/static/js/popper.min.js"></script>
+        <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+
+        <a class="btn btn-primary" href="/Aportaciones_IMSS" align="right">Regresar &nbsp;<i class="fas fa-undo-alt"></i></a>
+    </form>
+
+</body>
+
+{% endblock %}

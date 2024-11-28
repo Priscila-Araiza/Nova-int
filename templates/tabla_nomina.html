@@ -1,0 +1,138 @@
+{% extends "layout.html" %} {% block content %}
+<script src="https://kit.fontawesome.com/c8a4eef53d.js" crossorigin="anonymous"></script>
+
+<style>
+    .content-table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9en;
+        min-width: 600px;
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgb(0, 0, 0, 0.15);
+    }
+    
+    .content-table thead tr {
+        background-color: #333769;
+        color: #ffff;
+        text-align: left;
+        font-weight: bold;
+    }
+    
+    .content-table th,
+    .content-table td {
+        padding: 12px 15px;
+    }
+    
+    .content-table tbody tr {
+        border-bottom: 1px solid #dddd;
+    }
+    
+    .content-table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+    
+    .content-table tbody tr:last-of-type {
+        border-bottom: 2px solid #333769;
+    }
+    
+    .content-table tbody tr.active-row {
+        font-weight: bold;
+        color: #333769;
+    }
+</style>
+
+<body style="background-color: #ffff;">
+    <right><a class="btn btn-primary" href="/nueva_nomina" title="Añadir un tipo de pago" style="text-decoration:none;">Añadir nueva nómina.</a></right>
+   
+        <center>
+            <h3>Nóminas registradas.</h3>
+          </center>
+        <br>
+        <form class="form-inline" action="/buscar_nomina" method="post">
+            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="form-row">
+                <br> <select name="tipo" id="tipo" class="form-control">
+                    <option value="" selected>Choose...</option>
+                        {%
+                            for tipo in tipos
+                        %}
+                              <option value="{{ tipo.0 }}">{{ tipo.1 }}</option>
+                        {%   endfor %}
+                </select>&nbsp;&nbsp;&nbsp;
+                <br><select name="area" id="area" class="form-control">
+                    <option value="" selected>Choose...</option>
+                    {% for area in areas %}
+                    <option value="{{ area.0 }}">{{ area.1 }}</option>
+                    {% endfor %}
+                    </select>&nbsp;&nbsp;&nbsp;
+                <br>
+                <p><input type="text" title="Buscar la nomina por el año" class="form-control" name="anio" id="anio" maxlength="4" min="4" pattern="^[0-9]+" placeholder="Año a buscar">
+            </div>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            <br>
+            <p><input type="text" title="Buscar consecutivos de la nomina" class="form-control" name="cons" id="cons" maxlength="11" min="1" pattern="^[0-9]+"placeholder="Consecutivo a buscar">
+                </div>&nbsp;&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+    </center>
+    <center>
+        <table class="content-table">
+    </center>
+    <thead>
+        <tr>
+            <th>Tipo de nómina</th>
+            <th>Período</th>
+            <th>área</th>
+            <th>Fecha</th>
+            <th>Año</th>
+            <th>Consecutivo</th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for nomina in nominas %}
+        <tr>
+            <td>
+                {{ nomina.2 }}
+            </td>
+            <td>
+                {{ nomina.4 }}
+            </td>
+            <td>
+                {{ nomina.6 }}
+            </td>
+            <td>
+                {{ nomina.7 }}
+            </td>
+            <td>
+                {{ nomina.8 }}
+            </td>
+            <td>
+                {{ nomina.9 }}
+            </td>
+
+            <td bgcolor="#828282" width="60">
+                <center><a href="/ed_nomina/{{nomina.0}}" style="color:#FFFFFF; text-decoration:none;">Editar &nbsp;<i class="far fa-edit"></i></a></center>
+            </td>
+            <td bgcolor="#007bff" width="60">
+                <center><a href="/clona_nomina/{{nomina.0}}" style="color:#FFFFFF; text-decoration:none;">Clonar &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-houses" viewBox="0 0 16 16">
+                    <path d="M5.793 1a1 1 0 0 1 1.414 0l.647.646a.5.5 0 1 1-.708.708L6.5 1.707 2 6.207V12.5a.5.5 0 0 0 .5.5.5.5 0 0 1 0 1A1.5 1.5 0 0 1 1 12.5V7.207l-.146.147a.5.5 0 0 1-.708-.708L5.793 1Zm3 1a1 1 0 0 1 1.414 0L12 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l1.854 1.853a.5.5 0 0 1-.708.708L15 8.207V13.5a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 4 13.5V8.207l-.146.147a.5.5 0 1 1-.708-.708L8.793 2Zm.707.707L5 7.207V13.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V7.207l-4.5-4.5Z"/>
+                  </svg></i></a></center>
+            </td>
+            <td bgcolor="#FFF5757" width="60">
+                <center><a href="/bo_nomina/{{nomina.0}}" style="color:#FFFFFF; text-decoration:none;">Borrar &nbsp;<i class="fas fa-trash-alt"></i></a></center>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="/static/js/popper.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+
+</body>
+
+{% endblock %}

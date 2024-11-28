@@ -1,0 +1,83 @@
+{% extends "layout.html" %} {% block content %}
+<script src="https://kit.fontawesome.com/c8a4eef53d.js" crossorigin="anonymous"></script>
+
+<head>
+    <title>Tipo de cuota </title>
+</head>
+
+<body style="background-color:#ffff;">
+
+    <form action="/agrega_aportacion" method="post">
+        <div class="form-row">
+            &nbsp;&nbsp;
+            <h2>Agrega Aportación del IMSS </h2>
+        </div>
+        &nbsp;&nbsp;<div class="form-row">
+            &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+                <label for="anio">Año</label>
+                <input type="text" class="form-control" name="anio" id="anio" maxlength="4" pattern="^[0-9]+(.[0-9]+)?$" required>
+            </div>
+            
+            &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+                <label for="uma">UMA</label>
+                <input   type="text" class="form-control" name="uma" id="uma"  maxlength="11" pattern="^[0-9]+(.[0-9]+)?$" required>
+            </div>
+        
+        
+            &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="dias">Días</label>
+            <input   type="text" class="form-control" name="dias" id="dias"  maxlength="11" pattern="^[0-9]+(.[0-9]+)?$" required>
+        </div>
+    
+
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="vacacion">Vacaciones</label>
+            <input   type="text" class="form-control" name="vacacion" id="vacacion" maxlength="11" pattern="^[0-9]+(.[0-9]+)?$" required>
+        </div>
+    
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="pri_vaca">Prima Vacacional</label>
+            <input   type="text" class="form-control" name="pri_vaca" id="pri_vaca"  maxlength="11" pattern="^[0-9]+(.[0-9]+)?$" required>
+        </div>
+        
+        </div>
+        
+
+        &nbsp;&nbsp;&nbsp;<div class="form-row">
+            &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="aguinaldo">Aguinaldo</label>
+            <input   type="text" class="form-control" name="aguinaldo" id="aguinaldo"  maxlength="11" pattern="^[0-9]+(.[0-9]+)?$" required>
+        </div>
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="excedente">Excedente</label>
+            <input   type="text" class="form-control" name="excedente" id="excedente"  maxlength="11" pattern="^[0-9]+(.[0-9]+)?$" required>
+        </div>
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="pre_dinero">Prestaciones en dinero</label>
+            <input   type="text" class="form-control" name="pre_dinero" id="pre_dinero"  maxlength="11" pattern="^[0-9]+(.[0-9]+)?$" required>
+        </div>
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="pre_especie">Prestaciones en especie</label>
+            <input   type="text" class="form-control" name="pre_especie" id="pre_especie"  maxlength="11" pattern="^[0-9]+(.[0-9]+)?$" required>
+        </div>
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-2">
+            <label for="inv_vida">Invalidéz y vida</label>
+            <input   type="text" class="form-control" name="inv_vida" id="inv_vida"  maxlength="11 " pattern="^[0-9]+(.[0-9]+)?$" required>
+        </div>&nbsp;&nbsp;&nbsp;
+</div><br>
+        <div class="form-group col-2">
+            <label for="ces_vejes">Cesantía y vejés</label>
+            <input   type="text" class="form-control" name="ces_vejes" id="ces_vejes"  maxlength="11" pattern="^[0-9]+(.[0-9]+)?$" required>
+        </div>
+
+        
+        <br> &nbsp;&nbsp;
+        <button type="submit" class="btn btn-primary">Agregar &nbsp;<i class="fas fa-paper-plane"></i></button>
+
+        <script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
+        <script type="text/javascript" src="/static/js/popper.min.js"></script>
+        <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+        <a class="btn btn-primary" href="/Aportaciones_IMSS" align="right">Regresar &nbsp;<i class="fas fa-undo-alt"></i></a>
+    </form>
+</body>
+{% endblock %}

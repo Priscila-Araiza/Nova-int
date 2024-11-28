@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+<script src="https://kit.fontawesome.com/c8a4eef53d.js" crossorigin="anonymous"></script>
+<head>
+	<title>Impuesto Sobre la Renta. </title>
+</head>
+
+<body style="background-color:#ffff;">
+
+          <form action="/agrega_isr" method="post">
+              <div class="form-row">
+                     <h2>&nbsp;&nbsp;&nbsp;&nbsp;Agregar ISR.</h2>
+              </div>
+        <div class="form-group col-md-4">
+          &nbsp;&nbsp;&nbsp;&nbsp;<label for="descripcion">Límite inferior</label>
+          <input class="form-control" id="decripcion" name="lim_inf"  pattern="[0-9-.]+" placeholder="Límite inferior" required>
+        </div>
+        <div class="form-group col-md-4">
+          &nbsp;&nbsp;&nbsp;&nbsp;<label for="descripcion">Límite superior</label>
+          <input class="form-control" id="decripcion" name="lim_sup"  pattern="[0-9-.]+" placeholder="Límite superior" required>
+        </div>
+        <div class="form-group col-md-4">
+          &nbsp;&nbsp;&nbsp;&nbsp;<label for="descripcion">Cuota fija</label>
+          <input class="form-control" id="decripcion" name="cuo_fi"  pattern="[0-9-.]+" placeholder="Cuota fija" required>
+        </div>
+        <div class="form-group col-md-4">
+          &nbsp;&nbsp;&nbsp;&nbsp;<label for="descripcion">Porcentaje</label>
+          <input class="form-control"   id="decripcion" name="por"  pattern="[0-9-.]+" placeholder="Porcentaje" required>
+        </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Agregar &nbsp;<i class="fas fa-paper-plane"></i></button>
+
+<script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="/static/js/popper.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <a class="btn btn-primary" href="/cal_isr" align="right">Regresar &nbsp;<i class="fas fa-undo-alt"></i></a>
+  </form>
+</body>
+{% endblock %}

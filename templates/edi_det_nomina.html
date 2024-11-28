@@ -1,0 +1,305 @@
+{% extends "layout.html" %}
+{% block content %}
+<head>
+    <title>HOME-INT</title>
+</head>
+<body style="background-color:#ffff;">
+<script src="https://kit.fontawesome.com/c8a4eef53d.js" crossorigin="anonymous"></script>
+<h2>Calculo detalle de nómina</h2>
+    <form action="/modifica_det_nomina/{{detalle.0}}/{{detalle.1}}" method="post">
+        <div class="form-row">
+                
+                <div class="form-group col-md-4">
+                  <label for="curp">CURP</label>
+                  <select disabled name="curp" id="curp" class="form-control">
+                      <option value="" selected disabled>Choose...</option>
+                          {% for empleado in curp %}
+                              {% if detalle[1]==empleado.0%}
+                                  <option value="{{ empleado.0 }}" selected>{{ empleado.1 }}</option>
+                              {% else %}
+                                  <option value="{{ empleado.0 }}"> {{ empleado.1 }}</option>
+                              {% endif %}
+                          {% endfor %}
+                  </select>&nbsp;
+              </div>
+                
+                <div  class="form-group col-4">
+                    <label for="sal_base" >Salario base</label>
+                    <input disabled type="text" class="form-control" name="sal_base" id="sal_base"  pattern="^[0-9]+(.[0-9]+)?$" maxlength="11" value="{{ salario.0 }}" class="form-control"  >
+                </div>
+                
+                <div class="form-group col-3">
+                  <label for="subsidio">Subsidio</label>
+                  <input disabled type="text" class="form-control" name="subsidio" id="subsidio" value="{{ detalle.9 }}" pattern="^[0-9-.]\d*$" maxlength="11">
+                </div>
+                <br>
+
+                &nbsp;&nbsp;&nbsp;
+                <div class="form-group col-4">
+                    <label for="tot_per">Total de percepciones</label>
+                    <input disabled type="text" class="form-control" name="tot_per" id="tot_per" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9" value="{{ detalle.3 }}" >
+                </div>
+                <br>
+            
+        
+                <div class="form-group col-4">
+                  <label for="isr">Impuesto Sobre la Renta</label>
+                  <input disabled type="text" class="form-control" name="isr" id="isr"  pattern="^[0-9]+(.[0-9]+)?$" maxlength="11" value="{{ detalle.4 }}"  >
+                </div>
+                <br>
+        
+                <div class="form-group col-md-3">
+                    <label for="imss">IMSS</label>
+                    <input disabled type="text" class="form-control" name="imss" id="imss"  pattern="^[0-9]+(.[0-9]+)?$" maxlength="11" value="{{ detalle.5 }}" >
+                </div>
+                <br>
+        
+                <div class="form-group col-md-4">
+                    <label for="tot_ded">Total de deducciones</label>
+                    <input disabled type="text" class="form-control" name="tot_ded" id="tot_ded"  pattern="^[0-9]+(.[0-9]+)?$" maxlength="11" value="{{ detalle.6 }}" >
+                </div>
+        
+                <div class="form-group col-4">
+                    <label for="sal_neto">Salario neto</label>
+                    <input disabled type="text" class="form-control" name="sal_neto" id="sal_neto"  pattern="^[0-9]+(.[0-9]+)?$" maxlength="11" value="{{ detalle.7 }}" >
+                </div>
+        
+                <div class="form-group col-3">
+                    <label for="tot_grabado">Total de grabado</label>
+                    <input disabled type="text" class="form-control" name="tot_grabado" id="tot_grabado"  pattern="^[0-9]+(.[0-9]+)?$" maxlength="11" value="{{ detalle.8 }}" >
+                </div>
+
+             
+             
+      
+                
+        </div>
+        
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <br>
+                
+                <script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
+                <script type="text/javascript" src="/static/js/popper.min.js"></script>
+                <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+
+    <a class="btn btn-primary" href="/nomina" align="right">Regresar &nbsp;<i class="fas fa-undo-alt"></i></a>
+    <a class="btn btn-primary" href="/cal_det_isr/{{detalle.0}}/{{detalle.1}}/{{salario.0}}/{{detalle.3}}" align="right">ISR &nbsp;</a>
+    <a class="btn btn-primary" href="/cal_det_imss/{{detalle.0}}/{{detalle.1}}/{{salario.0}}/{{detalle.3}}/30" align="right">Imss &nbsp;</a>
+    </form>
+    <!---------------------------------------------------------------------------------------------------------------------------------->
+    
+    <style>
+        .content-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9en;
+            min-width: 600px;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgb(0, 0, 0, 0.15);
+        }
+        
+        .content-table thead tr {
+            background-color: #333769;
+            color: #ffff;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .content-table th,
+        .content-table td {
+            padding: 12px 15px;
+        }
+        
+        .content-table tbody tr {
+            border-bottom: 1px solid #dddd;
+        }
+        
+        .content-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+        
+        .content-table tbody tr:last-of-type {
+            border-bottom: 2px solid #333769;
+        }
+        
+        .content-table tbody tr.active-row {
+            font-weight: bold;
+            color: #333769;
+        }
+      </style>
+
+<!------------estilo de tabla --------------------------------------------->
+
+<center><h3>Percepciones por nómina</h3></center>
+<div class="panel panel-primary">
+    <div class="panel-heading" >
+        <form class="form-inline" action="/agrega_per_nomina/{{detalle.0}}/{{detalle.1}}" method="post">
+            <div class="form-row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="hidden" name="per" id="per" value="{{detalle.0}}">
+                <input type="hidden" name="curp" id="curp" value="{{detalle.1}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="percepcion">Percepciones</label>&nbsp;&nbsp;&nbsp;
+                <select required name="percepcion" id="percepcion" class="form-control">
+                             <option value="" selected>Choose...</option>
+                                {%
+                                  for percepcion in percepciones
+                                %}
+                                     <option value="{{ percepcion.0 }}">{{ percepcion.1 }}</option>
+                                {%   endfor %}
+                             </select>&nbsp;&nbsp;&nbsp;
+                             
+                             <label for="monto">Monto</label>&nbsp;&nbsp;&nbsp;
+                             <input type="text" class="form-control" name="monto" id="monto" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9" placeholder="Monto"  required>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                             <button type="submit" class="btn btn-primary">Agrega Percepción</button>
+                              </div>
+
+                             
+                         </div>
+                        
+                    </form>
+                  </div>
+                  <br>
+                  <center>
+                    <table class="content-table">
+                  </center>
+                  <thead>
+                    <tr>
+                     
+                      <th>Percepciones</th>
+                      <th>Monto</th>
+                      <th>Grabado</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%  for percepcion in per_nomina  %}
+                    <tr>
+                      <td>
+                        {{ percepcion.3 }}
+                      </td>
+                      <td>
+                        {{ percepcion.7 }}
+                      </td>
+                      <td>
+                        {{ percepcion.4 }}
+                      </td>
+                     
+                      <td  bgcolor="#FFF5757" width="60">
+                        <center><a href="/bo_per_nomina/{{percepcion.0}}/{{percepcion.1}}/{{percepcion.2}}" style="color:#FFFFFF; text-decoration:none;">Borrar &nbsp;<i class="far fa-edit"></i></a></center>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                  </table>
+      
+    </form>
+
+<!---------------------------------------------------------------------------------------------------------------------------------->
+    
+<style>
+  .content-table {
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.9en;
+      min-width: 600px;
+      border-radius: 5px 5px 0 0;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgb(0, 0, 0, 0.15);
+  }
+  
+  .content-table thead tr {
+      background-color: #333769;
+      color: #ffff;
+      text-align: left;
+      font-weight: bold;
+  }
+  
+  .content-table th,
+  .content-table td {
+      padding: 12px 15px;
+  }
+  
+  .content-table tbody tr {
+      border-bottom: 1px solid #dddd;
+  }
+  
+  .content-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+  }
+  
+  .content-table tbody tr:last-of-type {
+      border-bottom: 2px solid #333769;
+  }
+  
+  .content-table tbody tr.active-row {
+      font-weight: bold;
+      color: #333769;
+  }
+</style>
+
+<!------------estilo de tabla --------------------------------------------->
+
+<h3>Deducciones por nómina</h3>
+<div class="panel panel-primary">
+    <div class="panel-heading" >
+        <form class="form-inline" action="/agrega_ded_nomina/{{detalle.0}}" method="post">
+            <div class="form-row">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="hidden" name="ded" id="ded" value="{{detalle.0}}">
+                <input type="hidden" name="curp" id="curp" value="{{detalle.1}}">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="deduccion">Deducciones</label>&nbsp;&nbsp;&nbsp;
+                <select required name="deduccion" id="deduccion" class="form-control">
+                             <option value="" selected>Choose...</option>
+                                {%
+                                  for deduccion in deducciones
+                                %}
+                                     <option value="{{ deduccion.0 }}">{{ deduccion.1 }}</option>
+                                {%   endfor %}
+                             </select>&nbsp;&nbsp;&nbsp;
+                              
+                             <label for="monto">Monto</label>&nbsp;&nbsp;&nbsp;
+                             <input type="text" class="form-control" name="monto" id="monto" pattern="^[0-9]+(.[0-9]+)?$" maxlength="9" placeholder="Monto" required>&nbsp;&nbsp;&nbsp;
+
+                         </div>&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-primary">Agrega Deducción</button>
+                    </form>
+                  </div>
+                  <br>
+                  <center>
+                    <table class="content-table">
+                  </center>
+                  <thead>
+                    <tr>
+                      <th>Deducciones</th>
+                      <th>Monto</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%  for deduccion in ded_nomina  %}
+                    <tr>
+                      <td>
+                        {{ deduccion.3 }}
+                      </td>
+                      <td>
+                        {{ deduccion.6 }}
+                      </td>
+                      <td  bgcolor="#FFF5757" width="60">
+                        <center><a href="/bo_ded_nomina/{{deduccion.0}}/{{deduccion.1}}/{{deduccion.2}}" style="color:#FFFFFF; text-decoration:none;">Borrar &nbsp;<i class="far fa-edit"></i></a></center>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                  </table>
+      
+    </form>
+
+
+            
+</body>
+
+{% endblock %}

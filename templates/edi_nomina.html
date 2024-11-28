@@ -1,0 +1,174 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<head>
+    <title>HOME-INT</title>
+</head>
+<body style="background-color:#ffffff;">
+<form action="/modifica_nomina/{{nomina.0}}" method="post">
+<script src="https://kit.fontawesome.com/c8a4eef53d.js" crossorigin="anonymous"></script>
+<h1>Edita Nómina</h1>
+    <!-- <script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>  -->
+    <script type="text/javascript" src="/static/js/popper.min.js"></script> 
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script> 
+    <div class="form-row">
+        
+        
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-md-3">
+            <label for="tipo">Tipos de nómina</label>
+            <select required name="tipo" id="tipo" class="form-control">
+                <option value="" selected required>Choose...</option>
+                    {% for tipos in tipos_nom %}
+                        {% if nomina[1]==tipos.0%}
+                            <option value="{{ tipos.0 }}" selected>{{ tipos.1 }}</option>
+                        {% else %}
+                            <option value="{{ tipos.0 }}"> {{ tipos.1 }}</option>
+                        {% endif %}
+                    {% endfor %}
+            </select>&nbsp;
+        </div>
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-md-3">
+            <label for="periodo">Periodos de pago</label>
+            <select required name="periodo" id="periodo" class="form-control">
+                <option value="" selected required>Choose...</option>
+                    {% for periodos in periodos_nom %}
+                        {% if nomina[2]==periodos.0%}
+                            <option value="{{ periodos.0 }}" selected>{{ periodos.1 }}</option>
+                        {% else %}
+                            <option value="{{ periodos.0 }}"> {{ periodos.1 }}</option>
+                        {% endif %}
+                    {% endfor %}
+            </select>&nbsp;
+        </div>
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-md-3">
+            <label for="periodo">Áreas</label>
+            <select required name="area" id="area" class="form-control">
+                <option value="" selected required>Choose...</option>
+                    {% for areas in areas_nom %}
+                        {% if nomina[3]==areas.0%}
+                            <option value="{{ areas.0 }}" selected>{{ areas.1 }}</option>
+                        {% else %}
+                            <option value="{{ areas.0 }}"> {{ areas.1 }}</option>
+                        {% endif %}
+                    {% endfor %}
+            </select>&nbsp;
+        </div>
+        </div>      
+        <div class="form-row">
+            &nbsp;&nbsp;&nbsp;<div class="form-group col-md-3">
+            <label for="fecha">Fecha</label>
+                <input type="date" class="form-control" name="fecha" id="fecha" value="{{ nomina.4 }}" pattern="^[1-9]\d*$" required placeholder="Fecha">
+        </div>
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-md-3">
+            <label for="anio">Año</label>
+                <input type="text" class="form-control" name="anio" id="anio" maxlength="4"  min="1" pattern="^[1-9]\d*$" value="{{ nomina.5 }}" required placeholder="Año">
+        </div>
+        &nbsp;&nbsp;&nbsp;<div class="form-group col-md-3">
+            <label for="consecutivo">Consecutivo de nómina</label>
+                <input type="text" class="form-control" name="consecutivo" id="consecutivo" maxlength="11"  min="1" pattern="^[1-9]\d*$" value="{{ nomina.6 }}"pattern="[1-9.]+" required placeholder="Consecutivo de nómina">
+        </div>
+        </div>
+    
+    &nbsp;&nbsp;&nbsp;
+        <button type="submit" class="btn btn-primary" >Enviar Cambios &nbsp;<i class="fas fa-paper-plane"></i></button>
+        <script type="text/javascript" src="/static/js/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="/static/js/popper.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+        <a class="btn btn-primary" href="/nomina" align="right" >Salir &nbsp;<i class="fas fa-undo-alt"></i></a>
+        <a class="btn btn-primary" href="/nueva_det_nomina/{{nomina.0}}" align="right" >Detallar &nbsp;<i class="fas fa-paper-plane"></i></a>
+
+</form>
+<!---------------------------------------------------------------------------------------------------------------------------------->
+    
+<style>
+    .content-table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9en;
+        min-width: 600px;
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgb(0, 0, 0, 0.15);
+    }
+    
+    .content-table thead tr {
+        background-color: #333769;
+        color: #ffff;
+        text-align: left;
+        font-weight: bold;
+    }
+    
+    .content-table th,
+    .content-table td {
+        padding: 12px 15px;
+    }
+    
+    .content-table tbody tr {
+        border-bottom: 1px solid #dddd;
+    }
+    
+    .content-table tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+    }
+    
+    .content-table tbody tr:last-of-type {
+        border-bottom: 2px solid #333769;
+    }
+    
+    .content-table tbody tr.active-row {
+        font-weight: bold;
+        color: #333769;
+    }
+  </style>
+
+<!------------estilo de tabla --------------------------------------------->
+
+  <form action="/agr_det_nomina/{{nomina.0}}" >
+    <br>
+    <center><h3>Detalles de nómina</h3></center><br>
+    <div class="panel panel-primary">
+        <div class="panel-heading" >
+            <form class="form-inline" action="/agr_det_nomina/{{nomina.0}}string:id>">
+                <div class="form-row">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <!-- <input type="hidden" name="per" id="per" value="{{nomina.0}}"> -->
+                      <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" href="/agrega_det_nomina" class="btn btn-primary">Detallar </button> -->
+                        </form>
+                      </div>
+                <br>
+                <center>
+                  <table class="content-table">
+                </center>
+                <thead>
+                  <tr>
+                    <th>CURP</th>
+                    <th>Nombre</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for detalle in detalles %}
+                  <tr>
+                    <td>
+                      {{ detalle.0 }}
+                    </td>
+                    <td>
+                      {{ detalle.1 }}
+                    </td>
+                    
+                    <td  bgcolor="#828282" width="60">
+                        <center><a href="/ed_det_nomina/{{nomina.0}}/{{detalle.0}}" style="color:#FFFFFF; text-decoration:none;">Calcular &nbsp;<i class="far fa-edit"></i></a></center>
+                      </td>
+                    <td  bgcolor="#FFF5757" width="60">
+                      <center><a href="/bo_det_nomina/{{nomina.0}}/{{detalle.0}}" style="color:#FFFFFF; text-decoration:none;">Borrar &nbsp;<i class="far fa-trash-alt"></i></a></center>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                </table>
+  
+</form>
+</body>
+{% endblock %}
